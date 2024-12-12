@@ -5,7 +5,7 @@ import classes from './List.module.css';
 export const List = memo(function ({ list, editedId, editForm }) {
   console.debug('List render');
   return <fieldset className={classes.list}>
-    <legend>Список дел</legend>
+    <legend>To do List</legend>
     <ol>
       {list.map((item, id) =>
         String(item.id) === editedId
