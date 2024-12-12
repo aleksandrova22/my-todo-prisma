@@ -1,10 +1,14 @@
-//import { neon } from '@neondatabase/serverless';
 //import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
 
-const prisma = new PrismaClient();
 
-//const sql = neon(process.env.POSTGRES_URL);
+const connectionString = `${process.env.DATABASE_URL}`
+const pool = new Pool({ connectionString })
+const adapter = new PrismaPg(pool)
+const prisma = new PrismaClient({ adapter })
+
 
 
 export default async function todo(request, response) {
@@ -39,10 +43,10 @@ export default async function todo(request, response) {
     case 'PATCH':
       const
         text1 = request.body.text;
-      await prisma.toDo.update({ where: { id }, data: { text:text1,checked: 'false' } });
+      await prisma.toDo.update({ where: { id }, data: { text: text1, checked: 'false' } });
       response.status(200).json({});
       return;
   }
-  //response.status(200).json( rows );
+
 }
 
