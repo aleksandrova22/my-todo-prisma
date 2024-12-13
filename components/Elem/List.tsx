@@ -1,8 +1,13 @@
 import { Item } from './Item';
 import { memo, Fragment } from 'react';
 import classes from './List.module.css';
+import type { AppProps } from "next/app";
 
-export const List = memo(function ({ list, editedId, editForm }) {
+type Object = {
+  list, editedId, editForm
+};
+
+export const List = memo(function ({ list, editedId, editForm }: Object) {
   console.debug('List render');
   return <fieldset className={classes.list}>
     <legend>To do List</legend>

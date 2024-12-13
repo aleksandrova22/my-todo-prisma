@@ -25,7 +25,7 @@ const
         toast.promise(pr, {
             loading: 'Fetcher ',
             success: 'ok',
-            error: (err) => `${err.toString()}`,
+            error: (err: Error) => `${err.toString()}`,
         });
         return await pr;
     }
@@ -56,11 +56,13 @@ export function ToDo() {
         [editFormValues, setEditFormValues] = useState(Array.from({ length: config.columns.length }, () => '')),
         [editedId, setEditedId] = useState(null),
 
+    
         onClick = async event => {
             const
-                action = event.target.closest('[data-action]')?.dataset?.action,
-                id = event.target.closest('[data-id]')?.dataset?.id;
-            console.log('onClick', { action, id });
+            target = event.target as HTMLElement,
+            action = (target.closest('[data-action]') as HTMLElement)?.dataset?.action,
+            id = (target.closest('[data-id]') as HTMLElement)?.dataset?.id;
+                           console.log('onClick', { action, id });
             if (!action) return;
             let
                 optimisticData = null;
@@ -95,6 +97,8 @@ export function ToDo() {
                         case START_EDIT:
                             setEditedId(id);
                             const
+
+                           
                                 editedData = data.find(el => String(el.id) === id);
                             setEditFormValues(
                                 config.columns.map(({ setVal, getVal }) =>
