@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Button } from './Button';
-import { ToDo } from '@prisma/client';
+import { ToDoList } from '@prisma/client';
 //import { Memoize } from 'typescript-memoize';
 
 const
@@ -10,7 +10,7 @@ const
 
 
 
-  export const Item = memo(function ({ item }) {
+  export const Item = memo(function Item({ item }: {item: ToDoList}) {
     console.debug('Item render id=', item);
     const
       { id, checked, text } = item;

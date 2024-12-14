@@ -26,24 +26,24 @@ export default async function todo(request, response) {
   switch (method) {
     case 'GET':
       response.setHeader('content-type', 'application/json; charset=utf-8');
-      const rowsGet = await prisma.toDo.findMany();
+      const rowsGet = await prisma.ToDoList.findMany();
       response.status(200).json(rowsGet);
       return;
     case 'POST':
       const
         text = request.body.text;
-      await prisma.toDo.create({ data: { text } });
+      await prisma.ToDoList.create({ data: { text } });
       response.status(201).json({});
 
       return;
     case 'DELETE':
-      await prisma.toDo.delete({ where: { id } });
+      await prisma.ToDoList.delete({ where: { id } });
       response.status(200).json({});
       return;
     case 'PATCH':
       const
         text1 = request.body.text;
-      await prisma.toDo.update({ where: { id }, data: { text: text1, checked: 'false' } });
+      await prisma.ToDoList.update({ where: { id }, data: { text: text1, checked: 'false' } });
       response.status(200).json({});
       return;
   }

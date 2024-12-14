@@ -7,7 +7,7 @@ export default function Home() {
       <Head>
         <title>Create Next App</title>
       </Head>
-      <h1>My Todo List</h1>
+      <h1>Мой список дел</h1>
       <ToDo />
     </>
   );

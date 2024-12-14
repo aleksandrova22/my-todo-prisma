@@ -1,19 +1,19 @@
 import { Item } from './Item';
-import { memo, Fragment } from 'react';
+import { memo, Fragment, ReactNode } from 'react';
 import classes from './List.module.css';
-import type { AppProps } from "next/app";
+import { ToDoList } from '@prisma/client';
 
-// type Object = {
-//   list: Array, editedId: number, editForm: object
-// };
+type ListProps = {
+  list: ToDoList[], editedId: ToDoList['id'] | null, editForm: ReactNode
+};
 
-export const List = memo(function ({ list, editedId, editForm }) {
+export const List = memo(function _List({ list, editedId, editForm }: ListProps) {
   console.debug('List render');
   return <fieldset className={classes.list}>
     <legend>Список дел</legend>
     <ol>
       {list.map((item, id) =>
-        String(item.id) === editedId
+        item.id === editedId
           ? <Fragment key={item.id}> {editForm}  </Fragment>
           : <Item key={id} item={item} />
       )}
